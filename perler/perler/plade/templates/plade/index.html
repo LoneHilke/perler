@@ -531,6 +531,26 @@
     <div id="menu6" class="container tab-pane fade"><br>
       <h3>Kontakt</h3>
       <p>Ved spørgsmål eller anden henvendelse, kan mail: lonehilke@gmail.com bruges.</p>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="ny meddelelse...">
+  </form>
+  <div class="container mb-2">
+    <table>
+{% for anm in anmeld %}
+    <tr>
+      <td><p style='margin:0;
+      transform: rotate(-5deg);position: relative;'>
+      <font color = green><b>Dato: </b> {{anm.created_on}}<br>
+      <u> <b>Anmeldelse:</b></u> {{ anm.anmeld }}<br>
+        <u><b>Navn: </b></u>  {{anm.navn}}<br>
+        <u><b>Kontakt mail/sms: </b></u> {{anm.kontakt}}<br></font>
+    </p><br><hr></td>
+    </tr>
+    {% endfor %}
+    </table>
+  </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Plade, Runde, Category, Kant
+from .models import Plade, Runde, Category, Kant, Anmeld
+from .forms import AnmeldForm
 
 # Create your views here.
 class Index(View):
@@ -14,6 +15,9 @@ class Index(View):
       rund = Plade.objects.filter(kant__name__contains = 'Rund')
       firkant = Plade.objects.filter(kant__name__contains = 'firkant')
       sekskant = Plade.objects.filter(kant__name__contains = 'sekskant')
+      form = AnmeldForm()
+      anmeld=Anmeld.objects.all()
+    
       context = {
           'stjerne': stjerne,
           'hjerter': hjerter,
@@ -24,5 +28,24 @@ class Index(View):
           'firkant': firkant,
           'sekskant': sekskant,
           'stjern': stjern,
+          'form': form,
+          'anmeld': anmeld
         } 
       return render(request, 'plade/index.html', context)
+    
+    def post(self, request, *args, **kwargs):
+    
+        form = AnmeldForm(request.POST)
+        if form.is_valid():
+            form.save()
+        
+            return redirect('/')
+        
+        anmeld = Anmeld.objects.all()
+        context = {
+        
+            'form': form,
+            'anmeld': anmeld,
+        
+        }
+        return render(request, 'plade/index.html', context)

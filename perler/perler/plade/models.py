@@ -28,3 +28,12 @@ class Kant(models.Model):
     def __str__(self):
         return self.name
     
+class Anmeld(models.Model):
+  created_on = models.DateTimeField(auto_now_add=True)
+  anmeld = models.TextField()
+  navn = models.CharField (max_length=100)
+  kontakt = models.CharField(max_length=150)
+
+  def __str__(self):
+    return self.navn
+    
