@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import Plade, Runde, Category, Kant, Anmeld
+from .models import Plade, Runde, Category, Kant, Anmeld, Kugle, Model
 from .forms import AnmeldForm
 
 # Create your views here.
@@ -17,6 +17,10 @@ class Index(View):
       sekskant = Plade.objects.filter(kant__name__contains = 'sekskant')
       form = AnmeldForm()
       anmeld=Anmeld.objects.all()
+      bordskåner = Kugle.objects.filter(model__name__contains = 'Bordskåner')
+      armbånd = Kugle.objects.filter(model__name__contains = 'Armbånd')
+      skål = Kugle.objects.filter(model__name__contains = 'Skål')
+      other = Kugle.objects.filter(model__name__contains = 'Other')
     
       context = {
           'stjerne': stjerne,
@@ -29,7 +33,11 @@ class Index(View):
           'sekskant': sekskant,
           'stjern': stjern,
           'form': form,
-          'anmeld': anmeld
+          'anmeld': anmeld,
+          'bordskåner': bordskåner,
+          'armbånd': armbånd,
+          'skål': skål,
+          'other': other
         } 
       return render(request, 'plade/index.html', context)
     

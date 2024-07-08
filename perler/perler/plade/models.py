@@ -37,3 +37,18 @@ class Anmeld(models.Model):
   def __str__(self):
     return self.navn
     
+
+class Kugle(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    image = models.ImageField(upload_to='images/')
+    model = models.ManyToManyField('Model')
+      
+    def __str__(self):
+        return self.name
+
+class Model(models.Model):
+    name = models.CharField(max_length=200)
+    
+    def __str__(self):
+        return self.name
