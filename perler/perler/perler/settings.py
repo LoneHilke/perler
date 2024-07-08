@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'plade',
-    #'jfrog-pypi-trial',
+    'jfrog-pypi-trial',
 ]
 
 MIDDLEWARE = [
